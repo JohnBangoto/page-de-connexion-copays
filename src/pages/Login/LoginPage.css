@@ -1,0 +1,405 @@
+/* Couleurs du drapeau du Sénégal */
+:root {
+  --senegal-green: #00853f;
+  --senegal-yellow: #fdef42;
+  --senegal-red: #e31b23;
+  --white: #ffffff;
+  --light-gray: #f5f5f5;
+  --dark-gray: #333333;
+}
+
+/* Animation du fond */
+@keyframes senegalBgAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  /* Gradient animé */
+  background: linear-gradient(to bottom, 
+                           var(--senegal-green) 0%, var(--senegal-green) 33%,
+                           var(--senegal-yellow) 33%, var(--senegal-yellow) 66%,
+                           var(--senegal-red) 66%, var(--senegal-red) 100%);
+  background-size: 200% 200%;
+  animation: senegalBgAnimation 15s ease infinite;
+  padding: 20px;
+}
+
+/* Animations pour les bordures */
+@keyframes senegalBorderPulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.login-card {
+  background-color: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  padding: 25px 20px;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Bordure tricolore Sénégal avec animation */
+.login-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(to right, var(--senegal-green) 33%, var(--senegal-yellow) 33%, var(--senegal-yellow) 66%, var(--senegal-red) 66%);
+  animation: senegalBorderPulse 3s ease-in-out infinite;
+}
+
+.login-title {
+  color: var(--senegal-green);
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+/* Animation du titre */
+@keyframes titleColorChange {
+  0% { color: var(--senegal-green); }
+  33% { color: var(--senegal-green); }
+  34% { color: var(--senegal-yellow); }
+  66% { color: var(--senegal-yellow); }
+  67% { color: var(--senegal-red); }
+  99% { color: var(--senegal-red); }
+  100% { color: var(--senegal-green); }
+}
+
+.login-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(to right, var(--senegal-green), var(--senegal-yellow), var(--senegal-red));
+  animation: senegalBorderPulse 2s ease-in-out infinite;
+}
+
+.login-form {
+  margin-bottom: 25px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Animation pour les champs de formulaire */
+@keyframes focusField {
+  0% {
+    border-color: var(--senegal-green);
+  }
+  33% {
+    border-color: var(--senegal-yellow);
+  }
+  66% {
+    border-color: var(--senegal-red);
+  }
+  100% {
+    border-color: var(--senegal-green);
+  }
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px; /* Taille de police plus grande pour mobile */
+  transition: all 0.3s ease;
+  -webkit-appearance: none; /* Corrige l'apparence sur iOS */
+}
+
+.form-input:focus {
+  outline: none;
+  border-width: 2px;
+  animation: focusField 4s infinite;
+  box-shadow: 0 0 10px rgba(0, 133, 63, 0.1);
+}
+
+/* Animation pour le bouton */
+@keyframes buttonPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.login-button {
+  width: 100%;
+  padding: 14px; /* Bouton plus grand pour faciliter le tap sur mobile */
+  background-color: var(--senegal-green);
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  -webkit-tap-highlight-color: transparent; /* Supprime le flash de surbrillance sur mobile */
+  position: relative;
+  overflow: hidden;
+}
+
+.login-button:hover, .login-button:active {
+  background-color: #006b32; /* Version plus foncée du vert */
+  animation: buttonPulse 1s ease-in-out;
+}
+
+/* Effet d'onde au clic */
+.login-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+.login-button:active::after {
+  opacity: 0.3;
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0) translate(-50%, -50%);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(20, 20) translate(-50%, -50%);
+    opacity: 0;
+  }
+}
+
+.oauth-section {
+  margin: 25px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Animation pour les boutons OAuth */
+@keyframes borderGlow {
+  0% {
+    box-shadow: 0 0 5px rgba(0, 133, 63, 0);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(0, 133, 63, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(0, 133, 63, 0);
+  }
+}
+
+.oauth-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px; /* Plus grand pour mobile */
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  width: 100%; /* S'assure que le bouton occupe toute la largeur sur mobile */
+  position: relative;
+  overflow: hidden;
+}
+
+.oauth-button.google {
+  background-color: var(--white);
+  color: var(--dark-gray);
+  border: 2px solid var(--senegal-yellow); /* Bordure plus visible */
+}
+
+.oauth-button.google:hover, .oauth-button.google:active {
+  background-color: var(--senegal-yellow);
+  color: var(--dark-gray);
+  animation: borderGlow 2s infinite;
+}
+
+.oauth-button.github {
+  background-color: var(--white);
+  color: var(--dark-gray);
+  border: 2px solid var(--senegal-red); /* Bordure plus visible */
+}
+
+.oauth-button.github:hover, .oauth-button.github:active {
+  background-color: var(--senegal-red);
+  color: var(--white);
+  animation: borderGlow 2s infinite;
+}
+
+.oauth-icon {
+  font-size: 20px; /* Icônes plus grandes pour mobile */
+  transition: transform 0.3s ease;
+}
+
+.oauth-button:hover .oauth-icon {
+  transform: scale(1.2);
+}
+
+/* Animation pour les liens */
+@keyframes linkColorChange {
+  0% {
+    color: var(--senegal-green);
+  }
+  33% {
+    color: var(--senegal-yellow);
+  }
+  66% {
+    color: var(--senegal-red);
+  }
+  100% {
+    color: var(--senegal-green);
+  }
+}
+
+.form-footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 15px; /* Plus grand pour mobile */
+}
+
+.forgot-password, .signup-link {
+  color: var(--senegal-green);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 5px; /* Zone tactile plus grande pour mobile */
+  display: inline-block;
+  position: relative;
+}
+
+.forgot-password:hover, .signup-link:hover,
+.forgot-password:active, .signup-link:active {
+  animation: linkColorChange 4s infinite;
+}
+
+.forgot-password::after, .signup-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--senegal-green), var(--senegal-yellow), var(--senegal-red));
+  transition: width 0.3s ease;
+}
+
+.forgot-password:hover::after, .signup-link:hover::after,
+.forgot-password:active::after, .signup-link:active::after {
+  width: 100%;
+}
+
+/* Media queries pour s'assurer que tout fonctionne bien sur mobile */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 20px 15px;
+  }
+  
+  .login-title {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  /* Bannière de couleurs du Sénégal au pied de la carte avec animation */
+  .login-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, var(--senegal-green) 33%, var(--senegal-yellow) 33%, var(--senegal-yellow) 66%, var(--senegal-red) 66%);
+    animation: senegalBorderPulse 3s ease-in-out infinite;
+  }
+}
+
+/* Animation pour l'étoile du drapeau sénégalais */
+@keyframes starRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Étoile sénégalaise animée */
+.login-title::before {
+  content: '★';
+  position: absolute;
+  left: 50%;
+  bottom: -18px;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: var(--senegal-yellow);
+  z-index: 1;
+  animation: starRotate 8s linear infinite;
+}
+
+/* Animation d'entrée pour la carte */
+@keyframes cardEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation pour la carte de connexion entière */
+.login-card {
+  animation: cardEntrance 0.8s ease-out forwards;
+}
