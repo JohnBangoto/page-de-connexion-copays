@@ -1,4 +1,12 @@
-/* Couleurs du drapeau du Sénégal */
+/* Pour éviter le contenu du commentaire HTML dans le CSS */
+/* Structure HTML à ajouter pour l'étoile:
+<div class="senegal-star senegal-star-main">★</div>
+*//* Animation pour la carte de connexion entière */
+.login-card {
+  animation: cardEntrance 0.8s ease-out forwards;
+  position: relative;
+  z-index: 1; /* Assure que la carte reste au-dessus de l'étoile */
+}/* Couleurs du drapeau du Sénégal */
 :root {
   --senegal-green: #00853f;
   --senegal-yellow: #fdef42;
@@ -8,8 +16,45 @@
   --dark-gray: #333333;
 }
 
-/* Animation du fond */
+/* Animation du fond - Version améliorée */
 @keyframes senegalBgAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 100% 25%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 0% 75%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  /* Gradient animé avec diagonale pour plus de mouvement */
+  background: linear-gradient(135deg, 
+                           var(--senegal-green) 0%, var(--senegal-green) 33%,
+                           var(--senegal-yellow) 33%, var(--senegal-yellow) 66%,
+                           var(--senegal-red) 66%, var(--senegal-red) 100%);
+  background-size: 300% 300%;
+  animation: senegalBgAnimation 10s ease infinite;
+  padding: 20px;
+  position: relative; /* Nécessaire pour positionner l'étoile */
+  overflow: visible;   /* Évite le débordement de l'étoile */
+}
+
+/* Alternative: Version avec vagues */
+/*
+@keyframes senegalBgWaveAnimation {
   0% {
     background-position: 0% 50%;
   }
@@ -26,16 +71,19 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  /* Gradient animé */
-  background: linear-gradient(to bottom, 
-                           var(--senegal-green) 0%, var(--senegal-green) 33%,
-                           var(--senegal-yellow) 33%, var(--senegal-yellow) 66%,
-                           var(--senegal-red) 66%, var(--senegal-red) 100%);
+  background: linear-gradient(45deg,
+                          var(--senegal-green) 0%, var(--senegal-green) 28%, 
+                          var(--senegal-yellow) 28%, var(--senegal-yellow) 38%,
+                          var(--senegal-green) 38%, var(--senegal-green) 62%,
+                          var(--senegal-yellow) 62%, var(--senegal-yellow) 72%,
+                          var(--senegal-red) 72%, var(--senegal-red) 100%);
   background-size: 200% 200%;
-  animation: senegalBgAnimation 15s ease infinite;
+  animation: senegalBgWaveAnimation 15s ease infinite;
   padding: 20px;
 }
+*/
 
+/* Le reste du CSS reste inchangé */
 /* Animations pour les bordures */
 @keyframes senegalBorderPulse {
   0% {
@@ -374,7 +422,7 @@
   }
 }
 
-/* Étoile sénégalaise animée */
+/* Étoile sénégalaise animée dans le style du drapeau */
 .login-title::before {
   content: '★';
   position: absolute;
@@ -382,7 +430,7 @@
   bottom: -18px;
   transform: translateX(-50%);
   font-size: 14px;
-  color: var(--senegal-yellow);
+  color: var(--senegal-green);
   z-index: 1;
   animation: starRotate 8s linear infinite;
 }
@@ -399,7 +447,34 @@
   }
 }
 
-/* Animation pour la carte de connexion entière */
-.login-card {
-  animation: cardEntrance 0.8s ease-out forwards;
+/* Grande étoile verte du drapeau du Sénégal */
+.senegal-star-main {
+  font-size: 200px; /* Taille plus grande */
+  color: var(--senegal-green);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.5; /* Opacité augmentée pour plus de visibilité */
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+  animation: starMainAnimation 6s ease-in-out infinite;
+  z-index: 0; /* S'assurer que l'étoile est en arrière-plan */
+}
+
+@keyframes starMainAnimation {
+  0% {
+    opacity: 0.2;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+  33% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1.05) rotate(5deg);
+  }
+  66% {
+    opacity: 0.35;
+    transform: translate(-50%, -50%) scale(1.1) rotate(-5deg);
+  }
+  100% {
+    opacity: 0.2;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
 }

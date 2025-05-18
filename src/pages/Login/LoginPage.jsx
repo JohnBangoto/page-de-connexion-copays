@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { supabase } from "../../../backend/supabaseClient";
+import { useNavigate, Link } from "react-router-dom";
+import { authService } from "../../../backend/Services/authService";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import "./LoginPage.css";
 
@@ -12,10 +12,7 @@ export default function LoginPage() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    const { data, error } = await authService.loginWithEmailPassword(email, password);
 
     if (error) {
       setErrorMsg(error.message);
@@ -26,12 +23,8 @@ export default function LoginPage() {
   };
 
   const handleOAuthLogin = async (provider) => {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider,
-      options: {
-        redirectTo: "http://localhost:5173/dashboard",
-      },
-    });
+    const redirectUrl = "http://localhost:5173/dashboard";
+    const { data, error } = await authService.loginWithOAuth(provider, redirectUrl);
 
     if (error) {
       setErrorMsg(error.message);
@@ -42,6 +35,9 @@ export default function LoginPage() {
 
   return (
     <div className="login-container">
+      {/* Une seule grosse étoile du drapeau du Sénégal */}
+      <div className="senegal-star senegal-star-main">★</div>
+      
       <div className="login-card">
         <h1 className="login-title">Bienvenue</h1>
 
@@ -53,6 +49,7 @@ export default function LoginPage() {
               className="form-input"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -62,12 +59,16 @@ export default function LoginPage() {
               className="form-input"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
-          {errorMsg && <p style={{ color: "red" }}>{errorMsg}</p>}
+          {errorMsg && <p className="error-message" style={{ color: "red" }}>{errorMsg}</p>}
           <button type="submit" className="login-button">
             Se connecter
           </button>
+           <Link to="/forgot-password" className="forgot-password">
+            Mot de passe oublié?
+          </Link>
         </form>
 
         <div className="oauth-section">
@@ -90,18 +91,14 @@ export default function LoginPage() {
         </div>
 
         <div className="form-footer">
-          <a href="#" className="forgot-password">
-            Mot de passe oublié?
-          </a>
           <p className="signup-prompt">
             Pas encore de compte?{" "}
-            <a href="/signup" className="signup-link">
+            <Link to="/signup" className="signup-link">
               S'inscrire
-            </a>
+            </Link>
           </p>
         </div>
       </div>
     </div>
   );
 }
-

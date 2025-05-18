@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { supabase } from "../../../backend/supabaseClient";
+import { authService } from "../../../backend/Services/authService";
 import "./LoginPage.css"; // on réutilise le même style
 
 export default function SignupPage() {
@@ -9,10 +9,7 @@ export default function SignupPage() {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
+    const { data, error } = await authService.signUp(email, password);
 
     if (error) {
       setMessage(error.message);
@@ -23,6 +20,9 @@ export default function SignupPage() {
 
   return (
     <div className="login-container">
+      {/* Une seule grosse étoile du drapeau du Sénégal */}
+      <div className="senegal-star senegal-star-main">★</div>
+      
       <div className="login-card">
         <h1 className="login-title">Créer un compte</h1>
         <form className="login-form" onSubmit={handleSignup}>
